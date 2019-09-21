@@ -1,4 +1,5 @@
 {
     "jshint.packageManager": "yarn",
     "jshint.options": {"esversion": 6},
+    "eslint.autoFixOnSave": true
 }

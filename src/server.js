@@ -10,24 +10,24 @@ app.use(cors());
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
 
-io.on('connection', socket => {
-    socket.on('connectRoom', box => {
-        socket.join(box);
-    });
+io.on('connection', (socket) => {
+  socket.on('connectRoom', (box) => {
+    socket.join(box);
+  });
 });
 
 mongoose.connect(process.env.DAB || 'mongodb://localhost:27017/omnistack', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
 app.use((req, res, next) => {
-    req.io = io;
-    return next();
+  req.io = io;
+  return next();
 });
 
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')));
 
